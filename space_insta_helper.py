@@ -5,7 +5,6 @@ import glob
 import itertools
 
 import requests
-from dotenv import load_dotenv
 from instabot import Bot
 
 IMAGES_DIR = 'images'
@@ -90,15 +89,8 @@ def upload_photo_to_instagram(filename='', caption=''):
 
 
 def upload_all_photos():
-    load_dotenv()
     images_to_publish = (glob.glob(f"images/*.{extension}") for extension in ACCEPTABLE_IMAGE_FILES_EXTENSIONS)
-
     for image_path in itertools.chain.from_iterable(images_to_publish):
         print(image_path)
         upload_photo_to_instagram(image_path)
         time.sleep(60)
-
-
-if __name__ == '__main__':
-    load_dotenv()
-    upload_all_photos()
